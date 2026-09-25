@@ -12,13 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Check for Go changes
+        id: changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/changed-files"
+          if grep -Eq '(^|/)[^/]+\.go$|^go\.(mod|sum)$' "$RUNNER_TEMP/changed-files"; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-go@v7
+        if: steps.changes.outputs.go == 'true'
         with:
           go-version-file: go.mod
           cache: false
       - name: Test
+        if: steps.changes.outputs.go == 'true'
         run: go test ./...
       - name: Vet
+        if: steps.changes.outputs.go == 'true'
         run: go vet ./...
       - name: Build
+        if: steps.changes.outputs.go == 'true'
         run: go build -o /dev/null ./cmd/vikunja-cli
