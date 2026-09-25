@@ -41,6 +41,13 @@ Set `VIKUNJA_CONFIG` to use a different protected file. The token is never
 accepted as a command argument or environment variable. Network access to your
 instance is required; this repository does not configure or expose a server.
 
+## Set up an agent skill
+
+To give an AI coding assistant a Vikunja skill on each computer, ask it to read
+[WIZARD.md](WIZARD.md) and walk through the setup with you. The wizard creates
+a personalized skill in that computer's agent skill directory. It does not
+install this repository's files as a skill or store credentials in Git.
+
 ## Commands
 
 ```text
