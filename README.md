@@ -1,5 +1,8 @@
 # vikunja-cli
 
+[![CI](https://github.com/vichr-vita/vikunja-cli/actions/workflows/ci.yml/badge.svg?event=pull_request)](https://github.com/vichr-vita/vikunja-cli/actions/workflows/ci.yml)
+[![Release](https://github.com/vichr-vita/vikunja-cli/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/vichr-vita/vikunja-cli/actions/workflows/release.yml)
+
 A small, dependency-free Go command-line client for the Vikunja API v2. It
 manages projects, tasks, labels, and task comments, and provides a constrained
 raw API command for other v2 endpoints. Commands emit one JSON value, so they
