@@ -84,6 +84,14 @@ server response (7) errors; 1 indicates an internal failure.
 `make test` runs the offline Go tests and vet. `make smoke` performs a read-only
 request for the authenticated user against the instance in your config file.
 
+Pull requests target `dev`. CI runs the offline tests, vet, and build for each
+pull request. Merging `dev` into `main` runs those checks again and publishes a
+GitHub release with Linux, macOS, and Windows binaries plus SHA-256 checksums.
+The first release is `v0.1.0`. Later releases use the commits since the previous
+tag: `feat:` bumps the minor version, `!` or `BREAKING CHANGE:` bumps the major
+version, and all other changes bump the patch version. The release tag points to
+the commit on `main`.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
